@@ -1314,6 +1314,31 @@ image load_image_stb(char *filename, int channels)
     return im;
 }
 
+
+// rgba, rgba, rgba
+// convert from ^ this to this \/
+// r, r, r
+// b, b, b
+// g, g, g
+// a, a, a
+image load_image_bitmap(int data[], int w, int h) {
+    image im = make_image(w, h, 4);
+    int i, j, k;
+    for(k = 0; k < 4; ++k) {
+        for(j = 0; j < h; ++j) {
+            for(i = 0; i < w; ++i) {
+                int dst_index = i + w*j + w*h*k;
+                int src_index = k + 4*i + 4*w*j;
+                im.data[dst_index] = (float)data[src_index]/255.;
+                //printf("imgdata before %f\n", (float)data[src_index]);
+                //printf("imgdata %f\n", im.data[dst_index]);
+            }
+        }
+    }
+    //free(data);
+    return im;
+}
+
 image load_image(char *filename, int w, int h, int c)
 {
 #ifdef OPENCV

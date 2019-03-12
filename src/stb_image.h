@@ -1176,6 +1176,9 @@ STBIDEF stbi_uc *stbi_load_from_file(FILE *f, int *x, int *y, int *comp, int req
       // need to 'unget' all the characters in the IO buffer
       fseek(f, - (int) (s.img_buffer_end - s.img_buffer), SEEK_CUR);
    }
+   //for(int i = 0; i < 1; i++) {
+   printf("%c\n", result[0]);
+   //}
    return result;
 }
 

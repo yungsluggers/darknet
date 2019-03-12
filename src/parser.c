@@ -765,10 +765,10 @@ network *parse_network_cfg(char *filename)
     n = n->next;
     int count = 0;
     free_section(s);
-    fprintf(stderr, "layer     filters    size              input                output\n");
+    //fprintf(stderr, "layer     filters    size              input                output\n");
     while(n){
         params.index = count;
-        fprintf(stderr, "%5d ", count);
+        //fprintf(stderr, "%5d ", count);
         s = (section *)n->val;
         options = s->options;
         layer l = {0};
@@ -1175,30 +1175,30 @@ void load_convolutional_weights(layer l, FILE *fp)
         fread(l.rolling_mean, sizeof(float), l.n, fp);
         fread(l.rolling_variance, sizeof(float), l.n, fp);
         if(0){
-            int i;
-            for(i = 0; i < l.n; ++i){
-                printf("%g, ", l.rolling_mean[i]);
-            }
-            printf("\n");
-            for(i = 0; i < l.n; ++i){
-                printf("%g, ", l.rolling_variance[i]);
-            }
-            printf("\n");
+            // int i;
+            // for(i = 0; i < l.n; ++i){
+            //     printf("%g, ", l.rolling_mean[i]);
+            // }
+            // printf("\n");
+            // for(i = 0; i < l.n; ++i){
+            //     printf("%g, ", l.rolling_variance[i]);
+            // }
+            // printf("\n");
         }
         if(0){
             fill_cpu(l.n, 0, l.rolling_mean, 1);
             fill_cpu(l.n, 0, l.rolling_variance, 1);
         }
         if(0){
-            int i;
-            for(i = 0; i < l.n; ++i){
-                printf("%g, ", l.rolling_mean[i]);
-            }
-            printf("\n");
-            for(i = 0; i < l.n; ++i){
-                printf("%g, ", l.rolling_variance[i]);
-            }
-            printf("\n");
+            // int i;
+            // for(i = 0; i < l.n; ++i){
+            //     printf("%g, ", l.rolling_mean[i]);
+            // }
+            // printf("\n");
+            // for(i = 0; i < l.n; ++i){
+            //     printf("%g, ", l.rolling_variance[i]);
+            // }
+            // printf("\n");
         }
     }
     fread(l.weights, sizeof(float), num, fp);
@@ -1222,7 +1222,7 @@ void load_weights_upto(network *net, char *filename, int start, int cutoff)
         cuda_set_device(net->gpu_index);
     }
 #endif
-    fprintf(stderr, "Loading weights from %s...", filename);
+    //fprintf(stderr, "Loading weights from %s...", filename);
     fflush(stdout);
     FILE *fp = fopen(filename, "rb");
     if(!fp) file_error(filename);
@@ -1301,7 +1301,7 @@ void load_weights_upto(network *net, char *filename, int start, int cutoff)
 #endif
         }
     }
-    fprintf(stderr, "Done!\n");
+    //fprintf(stderr, "Done!\n");
     fclose(fp);
 }
 
