@@ -614,13 +614,13 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
 void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char* label, int top, char *imagedata) {
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
-    int imgIntArray[4] = {1,2,3,4};
+    int imgIntArray[5625] = {};
     char *tok = strtok(imagedata, ",");
     int i = 0;
     // Keep going until we run out of tokens
     while (tok) {
         // Don't overflow your target array
-        if (i < 7) {
+        if (i < 5624) {
             // Convert to integer and store it
             imgIntArray[i++] = atoi(tok);
         }
