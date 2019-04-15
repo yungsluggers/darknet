@@ -8,14 +8,17 @@
 
 // main();
 
-const { exec } = require('child_process');
-exec('./darknet classifier one_label cfg/imagenet1k.data cfg/darknet19.cfg darknet19.weights n02107683 12,234,24,100', (err, stdout, stderr) => {
-  if (err) {
-    console.log('err: ' + err);
-    return;
-  }
+const { exec } = require('child_process')
+exec(
+  './darknet classifier one_label cfg/imagenet1k.data cfg/darknet19.cfg darknet19.weights n02107683 12,234,24,100,12,234,24,100,12,234,24,100,12,234,24,100 2',
+  (err, stdout, stderr) => {
+    if (err) {
+      console.log('err: ' + err)
+      return
+    }
 
-  // the *entire* stdout and stderr (buffered)
-  console.log(`${stdout}`);
-  //console.log(`stderr: ${stderr}`);
-});
+    // the *entire* stdout and stderr (buffered)
+    console.log(`${stdout}`)
+    //console.log(`stderr: ${stderr}`);
+  }
+)
