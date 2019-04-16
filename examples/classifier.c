@@ -689,7 +689,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
     int totalsize = sizeInt * sizeInt;
-    int imgIntArray[99999] = {};
+    int imgIntArray[900] = {};
 
     //memset(imgIntArray, 0, totalsize * sizeof(int));
     char *tok = strtok(imagedata, ",");
