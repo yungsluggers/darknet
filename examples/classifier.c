@@ -697,8 +697,8 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     // Keep going until we run out of tokens
     while (tok)
     {
-        printf(tok);
-        printf("\n");
+        //printf(tok);
+        //printf("\n");
         // Don't overflow your target array
         if (i < totalsize)
         {
