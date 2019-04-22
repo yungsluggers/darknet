@@ -51,13 +51,11 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
 
     //list *options = read_data_cfg(datacfg);
 
-    char *name_list = "data/9k.labels";
     //if(top == 0) top = option_find_int(options, "top", 1);
 
     //printf( "value of namelist: %s\n", name_list );
 
-    char **n = get_labels(name_list);
-    char **shortns = get_labels("data/9k.names");
+    char **n = get_labels("data/9k.labels");
 
     i = 0;
     char *blah = label;
@@ -92,12 +90,16 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
         hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
     top_k(predictions, net->outputs, top, indexes);
     //fprintf(stderr, "%s: Predicted in %f seconds.\n", input, sec(clock()-time));
+    char **labels = get_labels("data/9k.labels");
+    char **names = get_labels("data/9k.names");
+
     for (int j = 0; j < 5; j++)
     {
         int index = indexes[j];
         //if(net->hierarchy) printf("%d, %s: %f, parent: %s \n",index, names[index], predictions[index], (net->hierarchy->parent[index] >= 0) ? names[net->hierarchy->parent[index]] : "Root");
         //else printf("%s: %f\n",names[index], predictions[index]);
-        printf("%.8f: %s\n", predictions[index], shortns[index]);
+        printf("%.8f: %s: %s\n", predictions[index], labels[index], names[index]);
+        printf("selected: %s\n", names[i]);
     }
     if (r.data != im.data)
         free_image(r);
