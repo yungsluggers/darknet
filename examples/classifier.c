@@ -113,7 +113,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
     int totalsize = sizeInt * sizeInt * 4;
-    int imgIntArray[32400] = {};
+    int imgIntArray[90000] = {};
 
     char imagedata[999999];
     FILE *f = fopen(filepath, "r");
