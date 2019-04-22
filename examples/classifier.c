@@ -23,7 +23,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
     int totalsize = sizeInt * sizeInt * 4;
-    int imgIntArray[40000] = {};
+    int imgIntArray[32400] = {};
 
     //memset(imgIntArray, 0, totalsize * sizeof(int));
     char *tok = strtok(imagedata, ",");
@@ -111,7 +111,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
     int totalsize = sizeInt * sizeInt * 4;
-    int imgIntArray[40000] = {};
+    int imgIntArray[32400] = {};
 
     //memset(imgIntArray, 0, totalsize * sizeof(int));
     char *tok = strtok(imagedata, ",");
@@ -139,7 +139,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
 
     //list *options = read_data_cfg(datacfg);
 
-    char *name_list = "data/imagenet.labels.list";
+    char *name_list = "data/9k.labels";
     //if(top == 0) top = option_find_int(options, "top", 1);
 
     //printf( "value of namelist: %s\n", name_list );
