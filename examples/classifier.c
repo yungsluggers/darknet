@@ -51,13 +51,13 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
 
     //list *options = read_data_cfg(datacfg);
 
-    char *name_list = "data/imagenet.labels.list";
+    char *name_list = "data/9k.labels";
     //if(top == 0) top = option_find_int(options, "top", 1);
 
     //printf( "value of namelist: %s\n", name_list );
 
     char **n = get_labels(name_list);
-    char **shortns = get_labels("data/imagenet.shortnames.list");
+    char **shortns = get_labels("data/9k.names");
 
     i = 0;
     char *blah = label;
