@@ -107,13 +107,18 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
     //if (filename) break;
 }
 
-void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *label, int top, char *imagedata, char *size)
+void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *label, int top, char *filepath, char *size)
 {
     int sizeInt = atoi(size);
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
     int totalsize = sizeInt * sizeInt * 4;
     int imgIntArray[32400] = {};
+
+    char imagedata[999999];
+    FILE *f = fopen(filepath, "r");
+    fscanf(f, "%[^\n]", imagedata);
+    fclose(f);
 
     //memset(imgIntArray, 0, totalsize * sizeof(int));
     char *tok = strtok(imagedata, ",");
@@ -185,7 +190,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     if (r.data != im.data)
         free_image(r);
     free_image(im);
-    //if (filename) break;
+    //if (filename) break;*/
 }
 
 void run_classifier(int argc, char **argv)
@@ -207,12 +212,12 @@ void run_classifier(int argc, char **argv)
     char *cfg = argv[4];
     char *weights = (argc > 5) ? argv[5] : 0;
     char *label = (argc > 6) ? argv[6] : 0;
-    char *imagedata = (argc > 7) ? argv[7] : 0;
+    char *filepath = (argc > 7) ? argv[7] : 0;
     char *size = (argc > 8) ? argv[8] : 0;
     if (0 == strcmp(argv[2], "predict"))
-        predict_classifier(data, cfg, weights, label, top, imagedata, size);
+        predict_classifier(data, cfg, weights, label, top, filepath, size);
     if (0 == strcmp(argv[2], "one_label"))
-        one_label_classifier(data, cfg, weights, label, top, imagedata, size);
+        one_label_classifier(data, cfg, weights, label, top, filepath, size);
     // else if(0==strcmp(argv[2], "fout")) file_output_classifier(data, cfg, weights, filename);
     // else if(0==strcmp(argv[2], "try")) try_classifier(data, cfg, weights, filename, atoi(layer_s));
     // else if(0==strcmp(argv[2], "train")) train_classifier(data, cfg, weights, gpus, ngpus, clear);
