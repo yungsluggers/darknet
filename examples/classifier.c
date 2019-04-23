@@ -230,8 +230,8 @@ void run_classifier(int argc, char **argv)
     char *cfg = argv[4];
     char *weights = (argc > 5) ? argv[5] : 0;
     char *label = (argc > 6) ? argv[6] : 0;
-    char *filepath = (argc > 7) ? argv[7] : 0;
-    char *size = (argc > 8) ? argv[8] : 0;
+    char *size = (argc > 7) ? argv[7] : 0;
+    char *filepath = (argc > 8) ? argv[8] : 0;
     if (0 == strcmp(argv[2], "predict"))
         predict_classifier(data, cfg, weights, label, top, filepath, size);
     if (0 == strcmp(argv[2], "one_label"))
