@@ -206,7 +206,8 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         if (r.data != im.data)
             free_image(r);
         free_image(im);
-        /*if (filename) break;*/
+        if (filepath)
+            break;
     }
 }
 
