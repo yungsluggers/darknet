@@ -17,13 +17,18 @@ float *get_regression_values(char **labels, int n)
     return v;
 }
 
-void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *label, int top, char *imagedata, char *size)
+void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *label, int top, char *filepath, char *size)
 {
     int sizeInt = atoi(size);
     //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
     // converting string ex: 123,242,234,234 to int array
     int totalsize = sizeInt * sizeInt * 4;
-    int imgIntArray[32400] = {};
+    int imgIntArray[90000] = {};
+
+    char imagedata[999999];
+    FILE *f = fopen(filepath, "r");
+    fscanf(f, "%[^\n]", imagedata);
+    fclose(f);
 
     //memset(imgIntArray, 0, totalsize * sizeof(int));
     char *tok = strtok(imagedata, ",");
@@ -51,11 +56,12 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
 
     //list *options = read_data_cfg(datacfg);
 
+    char *name_list = "data/9k.labels";
     //if(top == 0) top = option_find_int(options, "top", 1);
 
     //printf( "value of namelist: %s\n", name_list );
 
-    char **n = get_labels("data/9k.labels");
+    char **n = get_labels(name_list);
 
     i = 0;
     char *blah = label;
@@ -92,7 +98,6 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
     //fprintf(stderr, "%s: Predicted in %f seconds.\n", input, sec(clock()-time));
     char **labels = get_labels("data/9k.labels");
     char **names = get_labels("data/9k.names");
-
     for (int j = 0; j < 5; j++)
     {
         int index = indexes[j];
@@ -104,7 +109,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *la
     if (r.data != im.data)
         free_image(r);
     free_image(im);
-    //if (filename) break;
+    //if (filename) break;*/
 }
 
 void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *label, int top, char *filepath, char *size)
