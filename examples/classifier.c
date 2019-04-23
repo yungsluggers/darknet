@@ -213,7 +213,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
             hierarchy_predictions(predictions, net->outputs, net->hierarchy, 1, 1);
         top_k(predictions, net->outputs, top, indexes);
         //fprintf(stderr, "%s: Predicted in %f seconds.\n", input, sec(clock()-time));
-        printf("%.8f", predictions[i]);
+        printf("%.8f\n", predictions[i]);
         if (r.data != im.data)
             free_image(r);
         free_image(im);
