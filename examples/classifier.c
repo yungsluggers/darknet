@@ -118,8 +118,11 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     set_batch_network(net, 1);
     srand(2222222);
 
-    char buff[256];
-    char *input = buff;
+    char filepathbuff[1024];
+    char *filepathinput = filepathbuff;
+
+    char idbuff[256];
+    char *idinput = idbuff;
 
     int imgIntArray[90000] = {};
 
@@ -129,16 +132,20 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     {
         if (filepath)
         {
-            strncpy(input, filepath, 256);
+            strncpy(filepathinput, filepath, 1024);
+            strncpy(idinput, label, 256);
         }
         else
         {
-            printf("Enter Image Path: ");
+            printf("Enter Image Path and label: ");
             fflush(stdout);
-            input = fgets(input, 256, stdin);
-            if (!input)
+            scanf("%1024s %256s", filepathinput, idinput);
+            if (!filepathinput)
                 return;
-            strtok(input, "\n");
+            strtok(filepathinput, "\n");
+            if (!idinput)
+                return;
+            strtok(idinput, "\n");
         }
 
         int sizeInt = atoi(size);
@@ -146,7 +153,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         // converting string ex: 123,242,234,234 to int array
         int totalsize = sizeInt * sizeInt * 4;
 
-        FILE *f = fopen(input, "r");
+        FILE *f = fopen(filepathinput, "r");
         fscanf(f, "%[^\n]", imagedata);
         fclose(f);
 
@@ -172,7 +179,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         char **n = get_labels("data/9k.labels");
 
         i = 0;
-        char *blah = label;
+        char *blah = idinput;
         while (*n != NULL)
         {
             //printf("value of n: %.*s\n", (int)sizeof(*n), *n);
