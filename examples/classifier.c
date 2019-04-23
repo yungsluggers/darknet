@@ -124,10 +124,6 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     char idbuff[256];
     char *idinput = idbuff;
 
-    int imgIntArray[90000] = {};
-
-    char imagedata[999999];
-
     while (1)
     {
         if (filepath)
@@ -137,9 +133,11 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         }
         else
         {
-            printf("Enter Image Path and label: ");
+            printf("Enter Image Path: ");
             fflush(stdout);
-            scanf("%1024s %256s", filepathinput, idinput);
+            scanf("%1024s", filepathinput);
+            printf("Enter id: ");
+            scanf("%256s", idinput);
             if (!filepathinput)
                 return;
             strtok(filepathinput, "\n");
@@ -152,6 +150,10 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         //printf("value of imagedata: %.*s\n", (int)sizeof(imagedata) + 7, imagedata);
         // converting string ex: 123,242,234,234 to int array
         int totalsize = sizeInt * sizeInt * 4;
+
+        int imgIntArray[90000] = {};
+
+        char imagedata[999999];
 
         FILE *f = fopen(filepathinput, "r");
         fscanf(f, "%[^\n]", imagedata);
@@ -193,11 +195,13 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         }
 
         int *indexes = calloc(top, sizeof(int));
+
         image im = load_image_bitmap(imgIntArray, sizeInt, sizeInt);
 
         // for (int i=0; i < 99; i++) {
         //     printf("%lf\n",im.data[i]);
         // }
+
         image r = letterbox_image(im, net->w, net->h);
         //image r = resize_min(im, 320);
         //printf("%d %d\n", r.w, r.h);
@@ -236,8 +240,8 @@ void run_classifier(int argc, char **argv)
     char *data = argv[3];
     char *cfg = argv[4];
     char *weights = (argc > 5) ? argv[5] : 0;
-    char *label = (argc > 6) ? argv[6] : 0;
-    char *size = (argc > 7) ? argv[7] : 0;
+    char *size = (argc > 6) ? argv[6] : 0;
+    char *label = (argc > 7) ? argv[7] : 0;
     char *filepath = (argc > 8) ? argv[8] : 0;
     if (0 == strcmp(argv[2], "predict"))
         predict_classifier(data, cfg, weights, label, top, filepath, size);
