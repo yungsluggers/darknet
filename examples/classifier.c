@@ -124,6 +124,10 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
     char idbuff[256];
     char *idinput = idbuff;
 
+    int imgIntArray[90000] = {};
+
+    char imagedata[999999];
+
     while (1)
     {
         if (filepath)
@@ -149,9 +153,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         // converting string ex: 123,242,234,234 to int array
         int totalsize = sizeInt * sizeInt * 4;
 
-        int imgIntArray[90000] = {};
-
-        char imagedata[999999];
+        memset(imagedata, 0, sizeof imagedata);
 
         FILE *f = fopen(filepathinput, "r");
         fscanf(f, "%[^\n]", imagedata);
@@ -167,6 +169,7 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
             {
                 // Convert to integer and store it
                 imgIntArray[i++] = atoi(tok);
+                printf("%d\n", atoi(tok));
             }
             // Get the next token from the string - note the use of NULL
             // instead of the string in this case - that tells it to carry
