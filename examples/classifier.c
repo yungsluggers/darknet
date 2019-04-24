@@ -142,6 +142,8 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
             if (!idinput)
                 return;
             strtok(idinput, "\n");
+            printf("filepath: %s \n", filepathinput);
+            printf("id: %s \n", idinput);
         }
 
         int sizeInt = atoi(size);
