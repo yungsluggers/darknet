@@ -169,7 +169,6 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
             {
                 // Convert to integer and store it
                 imgIntArray[i++] = atoi(tok);
-                printf("%d\n", atoi(tok));
             }
             // Get the next token from the string - note the use of NULL
             // instead of the string in this case - that tells it to carry
