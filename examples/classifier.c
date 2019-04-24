@@ -133,11 +133,9 @@ void one_label_classifier(char *datacfg, char *cfgfile, char *weightfile, char *
         }
         else
         {
-            printf("Enter Image Path: \n");
+            printf("Enter Image Path and id: \n");
             fflush(stdout);
-            scanf("%1024s", filepathinput);
-            printf("Enter id: \n");
-            scanf("%256s", idinput);
+            scanf("%1024s %256s", filepathinput, idinput);
             if (!filepathinput)
                 return;
             strtok(filepathinput, "\n");
